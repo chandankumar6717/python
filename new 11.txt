@@ -1,0 +1,60 @@
+Welcome to your first casestudy
+In this case study you have to scrape weather data from the website "http://www.estesparkweather.net/archive_reports.php?date=200901"
+Scrape all the available attributes of weather data for each day from 2009-01-01 to 2018-10-28
+Ignore records for missing days
+Represent the scraped data as pandas dataframe object.
+
+Dataframe specific deatails
+Expected column names (order dose not matter):
+ ['Average temperature (°F)', 'Average humidity (%)',
+ 'Average dewpoint (°F)', 'Average barometer (in)',
+ 'Average windspeed (mph)', 'Average gustspeed (mph)',
+ 'Average direction (°deg)', 'Rainfall for month (in)',
+ 'Rainfall for year (in)', 'Maximum rain per minute',
+ 'Maximum temperature (°F)', 'Minimum temperature (°F)',
+ 'Maximum humidity (%)', 'Minimum humidity (%)', 'Maximum pressure',
+ 'Minimum pressure', 'Maximum windspeed (mph)',
+ 'Maximum gust speed (mph)', 'Maximum heat index (°F)']
+Each record in the dataframe corresponds to weather deatils of a given day
+Make sure the index column is date-time format (yyyy-mm-dd)
+Perform necessary data cleaning and type cast each attributes to relevent data type
+Saving the dataframe
+Once you are done with you scrapping save your dataframe as pickle file by name 'dataframe.pk'
+Sample code to save pickle file
+import pickle
+with open("dataframe.pk", "wb") as file:
+    pickle.dump(<your_dataframe>, file)
+Run the below cell to import necessary packages
+These packages should be sufficient to perform you task
+In case if you are looking are any other packages run !pip3 install --user with in a cell
+import bs4
+from bs4 import BeautifulSoup
+import csv
+import requests
+import time
+import pandas as pd
+import urllib
+import re
+import pickle
+#### Start you code here, you are free to add any number of cells
+from requests import get
+from bs4 import BeautifulSoup
+​
+date_range = ['201109', '201110', '201111', '201112', '201201', '201202', '201203', '201204', '201205', '201206', '201207', '201208', '201209', '201210', '201211', '201212', '201301', '201302', '201303', '201304', '201305', '201306', '201307', '201308', '201309', '201310', '201311', '201312', '201401', '201402', '201403', '201404', '201405', '201406', '201407', '201408', '201409', '201410', '201411', '201412', '201501', '201502', '201503', '201504', '201505', '201506', '201507', '201508', '201509', '201510', '201511', '201512', '201601', '201602', '201603', '201604', '201605', '201606', '201607', '201608', '201609', '201610', '201611', '201612', '201701', '201702', '201703', '201704', '201705', '201706', '201707', '201708', '201709', '201710', '201711', '201712', '201801', '201802', '201803', '201804', '201805', '201806', '201807', '201808', '201809', '201810']
+​
+#http://www.estesparkweather.net/archive_reports.php?date=200901
+url = 'http://www.estesparkweather.net/archive_reports.php?date=201904'
+url_response = get(url)
+html_soup = BeautifulSoup(url_response.text , 'html.parser')
+#type(html_soup)
+#print(html_soup)
+rows = html_soup.find_all('tr')
+#print(rows)
+​
+​https://www.datacamp.com/community/tutorials/web-scraping-using-python
+list_rows=[]
+for i in rows:
+    row_td = i.find('td')
+    #row_td_val = row_td.text
+print(row_td)
+​
